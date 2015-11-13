@@ -17,8 +17,8 @@ public class MockAssignmentService implements AssignmentService {
     }
 
     @Override
-    public Collection<Assignment> list() {
-        return assignments.values();
+    public int list() {
+        return assignments.size();
     }
 
     @Override
@@ -32,8 +32,13 @@ public class MockAssignmentService implements AssignmentService {
     }
 
     @Override
-    public Assignment find(int assignmentID) {
+    public Assignment findAssignment(int assignmentID) {
         return assignments.get(assignmentID);
+    }
+
+    @Override
+    public Deliverable findDeliverable(int assignmentID,String username) {
+        return assignments.get(assignmentID).getDeliverable(username);
     }
 
     @Override

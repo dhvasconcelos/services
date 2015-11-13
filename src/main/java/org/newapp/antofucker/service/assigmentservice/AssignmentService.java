@@ -10,13 +10,15 @@ import java.util.Collection;
  */
 public interface AssignmentService {
 
-    public Collection<Assignment> list();
+    public int list();
 
     public void add (Assignment assignment);
 
     public void remove(int assignmentID);
 
-    public Assignment find(int assignmentID);
+    public Assignment findAssignment(int assignmentID);
+
+    public Deliverable findDeliverable(int assignmentID,String username);
 
     public void updateAssignment(int assignmentID, Assignment newAssignment);
 

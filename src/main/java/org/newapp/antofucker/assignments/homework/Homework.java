@@ -3,7 +3,8 @@ package org.newapp.antofucker.assignments.homework;
 import org.newapp.antofucker.assignments.Assignment;
 import org.newapp.antofucker.othershits.Bootcamp;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
  * Created by cadet on 12/11/15.

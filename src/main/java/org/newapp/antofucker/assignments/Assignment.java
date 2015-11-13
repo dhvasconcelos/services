@@ -2,8 +2,8 @@ package org.newapp.antofucker.assignments;
 
 import org.newapp.antofucker.othershits.Bootcamp;
 
+import java.sql.Date;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,13 +15,16 @@ public class Assignment {
     final private int bootcampID = Bootcamp.getInstance().getBootcampID();
     final private int assignmentID;
 
+    private String assignmentType;
     private static int mockID = 0;
     private Date creationDate;
     private String title;
     private Map<String, Deliverable> deliverables = new HashMap<>();
 
     public Assignment(String title) {
-        creationDate = new Date(System.currentTimeMillis());
+        //DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date myDate = new Date(System.currentTimeMillis());
+        creationDate = new Date(myDate.getTime());
         setTitle(title);
 
         //MOCK ID
@@ -70,5 +73,12 @@ public class Assignment {
         return assignmentID;
     }
 
+    public String getAssignmentType() {
+        return assignmentType;
+    }
+
+    public void setAssignmentType(String assignmentType) {
+        this.assignmentType = assignmentType;
+    }
 }
 

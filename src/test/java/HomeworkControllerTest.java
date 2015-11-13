@@ -6,6 +6,7 @@ import org.newapp.antofucker.assignments.Deliverable;
 import org.newapp.antofucker.assignments.homework.Homework;
 import org.newapp.antofucker.othershits.User;
 import org.newapp.antofucker.service.assigmentservice.AssignmentService;
+import org.newapp.antofucker.service.assigmentservice.JDBCAssignmentService;
 import org.newapp.antofucker.service.assigmentservice.MockAssignmentService;
 
 import java.util.Date;
@@ -19,14 +20,14 @@ public class HomeworkControllerTest {
 
     @Before
     public void createService() {
-        assignmentService = new MockAssignmentService();
+        assignmentService = new JDBCAssignmentService();
     }
 
 
     @Test
     public void testAddAssignment() {
         assignmentService.add(new Homework("NEW_HW"));
-        Assert.assertEquals(1, assignmentService.list().size());
+        Assert.assertEquals(1, assignmentService.list());
     }
 
     @Test
@@ -34,10 +35,10 @@ public class HomeworkControllerTest {
         assignmentService.add(new Homework("NEW_HW"));
         assignmentService.add(new Homework("NEW_HW2"));
         assignmentService.add(new Homework("NEW_HW3"));
-        Assert.assertEquals(3, assignmentService.list().size());
+        Assert.assertEquals(3, assignmentService.list());
     }
 
-    @Test
+    /*@Test
     public void testRemoveAssignment() {
         Assignment hw = new Homework("HW_TO_DEL");
         assignmentService.add(hw);
@@ -87,6 +88,6 @@ public class HomeworkControllerTest {
 
         Assert.assertEquals(del1.getUserName(),"antonious");
 
-    }
+    }*/
 
 }

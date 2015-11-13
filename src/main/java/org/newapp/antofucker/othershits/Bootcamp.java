@@ -7,7 +7,7 @@ public class Bootcamp {
 
     private static Bootcamp bootcampInstance = null;
 
-    private int bootcampID = 0;
+    private int bootcampID = 1;
 
     public static Bootcamp getInstance() {
 

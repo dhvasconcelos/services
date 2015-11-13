@@ -22,7 +22,7 @@ public class HomeworkController {
     public boolean addHomework(String title) {
 
         Homework hw = new Homework(title);
-        if (homeworkService.find(hw.getAssignmentID()) != hw) {
+        if (homeworkService.findAssignment(hw.getAssignmentID()) != hw) {
             return true;
         }
 
@@ -31,12 +31,12 @@ public class HomeworkController {
 
     public boolean addDeliverable(int assignmentID, Deliverable deliverable) {
 
-        if (homeworkService.find(assignmentID) instanceof Summarizer &&
-                homeworkService.find(assignmentID).getDeliverables().size() > 0) {
+        if (homeworkService.findAssignment(assignmentID) instanceof Summarizer &&
+                homeworkService.findAssignment(assignmentID).getDeliverables().size() > 0) {
             return false;
         }
 
-        homeworkService.find(assignmentID).addDeliverable(deliverable);
+        homeworkService.findAssignment(assignmentID).addDeliverable(deliverable);
         return true;
     }
 
