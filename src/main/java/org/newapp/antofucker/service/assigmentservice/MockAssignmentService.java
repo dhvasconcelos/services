@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class MockAssignmentService implements AssignmentService {
 
-    HashMap<String, Assignment> assignments = new HashMap<>();
+    HashMap<Integer, Assignment> assignments = new HashMap<>();
 
     public MockAssignmentService() {
     }
@@ -23,7 +23,7 @@ public class MockAssignmentService implements AssignmentService {
 
     @Override
     public void add(Assignment assignment) {
-        assignments.put(assignment.getTitle(), assignment);
+        assignments.put(assignment.getAssignmentID(), assignment);
     }
 
     @Override
@@ -32,9 +32,8 @@ public class MockAssignmentService implements AssignmentService {
     }
 
     @Override
-    public Assignment find(String string) {
-
-        return assignments.get(string);
+    public Assignment find(int assignmentID) {
+        return assignments.get(assignmentID);
     }
 
     @Override
@@ -46,20 +45,20 @@ public class MockAssignmentService implements AssignmentService {
     public void updateDeliverable(Assignment assignment, Deliverable deliverable, Deliverable newDeliverable) {
 
         assignments.get(assignment.getTitle())
-                .getDeliverable(deliverable.getUser())
+                .getDeliverable(deliverable.getUserName())
                 .setTitle(newDeliverable.getTitle());
 
         assignments.get(assignment.getTitle())
-                .getDeliverable(deliverable.getUser())
+                .getDeliverable(deliverable.getUserName())
                 .setDeliveryDate(newDeliverable.getDeliveryDate());
 
         assignments.get(assignment.getTitle())
-                .getDeliverable(deliverable.getUser())
+                .getDeliverable(deliverable.getUserName())
                 .setTags(newDeliverable.getTags());
 
 
         assignments.get(assignment.getTitle())
-                .getDeliverable(deliverable.getUser())
-                .setUser(newDeliverable.getUser());
+                .getDeliverable(deliverable.getUserName())
+                .setUserName(newDeliverable.getUserName());
     }
 }

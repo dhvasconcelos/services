@@ -76,17 +76,16 @@ public class HomeworkControllerTest {
     @Test
     public void testUpdateDeliverableUser() {
         Assignment hw = new Homework("HOMEWORK_TITLE");
-        Deliverable del1 = new Deliverable(new User("antofo","test","test"),"SQL",new Date(),"http://test.com");
-        Deliverable del2 = new Deliverable(new User("danielo","test","test"),"SQL",new Date(),"http://test.com");
+        Deliverable del1 = new Deliverable("anto","SQL",new Date(),"http://test.com");
+        Deliverable del2 = new Deliverable("danielo","SQL",new Date(),"http://test.com");
 
         assignmentService.add(hw);
         hw.addDeliverable(del1);
         hw.addDeliverable(del2);
 
-        User newUser = new User("antonious","test","test");
-        assignmentService.updateDeliverable(hw, del1, new Deliverable(newUser,"SQL",new Date(),"http://test.com"));
+        assignmentService.updateDeliverable(hw, del1, new Deliverable("antonious", "SQL", new Date(), "http://test.com"));
 
-        Assert.assertEquals(del1.getUser(),newUser);
+        Assert.assertEquals(del1.getUserName(),"antonious");
 
     }
 

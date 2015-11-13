@@ -1,8 +1,8 @@
 package org.newapp.antofucker.assignments;
 
 import org.newapp.antofucker.othershits.Bootcamp;
-import org.newapp.antofucker.othershits.User;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,22 +12,26 @@ import java.util.Map;
  */
 public class Assignment {
 
-    private Bootcamp bootcamp;
+    final private int bootcampID = Bootcamp.getInstance().getBootcampID();
+    final private int assignmentID;
+
+    private static int mockID = 0;
     private Date creationDate;
     private String title;
     private Map<String, Deliverable> deliverables = new HashMap<>();
 
     public Assignment(String title) {
         creationDate = new Date(System.currentTimeMillis());
-
         setTitle(title);
+
+        //MOCK ID
+        assignmentID = mockID++;
     }
 
-    public Assignment (Bootcamp bootcamp, Date creationDate, String title) {
-        this.bootcamp = bootcamp;
+    public Assignment (Date creationDate, String title, int assignmentID) {
         this.creationDate = creationDate;
         this.title = title;
-
+        this.assignmentID = assignmentID;
     }
 
     public String getTitle() {
@@ -38,12 +42,8 @@ public class Assignment {
         this.title = title;
     }
 
-    public Bootcamp getBootcamp() {
-        return bootcamp;
-    }
-
-    public void setBootcamp(Bootcamp bootcamp) {
-        this.bootcamp = bootcamp;
+    public int getBootcamp() {
+        return bootcampID;
     }
 
     public Date getCreationDate() {
@@ -55,15 +55,19 @@ public class Assignment {
     }
 
     public void addDeliverable(Deliverable deliverable) {
-        deliverables.put(deliverable.getUser().getUsername(),deliverable);
+        deliverables.put(deliverable.getUserName(),deliverable);
     }
 
-    public Map<String, Deliverable> getDeliverables() {
-        return deliverables;
+    public Collection<Deliverable> getDeliverables() {
+        return deliverables.values();
     }
 
-    public Deliverable getDeliverable(User user) {
-        return deliverables.get(user.getUsername());
+    public Deliverable getDeliverable(String userName) {
+        return deliverables.get(userName);
+    }
+
+    public int getAssignmentID() {
+        return assignmentID;
     }
 
 }

@@ -16,7 +16,7 @@ public interface AssignmentService {
 
     public void remove(Assignment assignment);
 
-    public Assignment find(String string);
+    public Assignment find(int assignmentID);
 
     public void updateAssignment(Assignment assignment, Assignment newAssignment);
 

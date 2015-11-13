@@ -13,21 +13,20 @@ import java.util.Map;
 public class Deliverable {
     private String title;
     private String url;
-    private User user;
+    private String userName;
     private Date deliveryDate;
     private Date assignDate;
     private Map<String, Tag> tags = new HashMap<>();
     private boolean approved = false;
 
 
-    public Deliverable(User user) {
-        this.deliveryDate = deliveryDate;
-        this.user = user;
+    public Deliverable(String userName) {
+        this.userName = userName;
 
     }
 
-    public Deliverable (User user, String title, Date deliveryDate, String url) {
-        this.user = user;
+    public Deliverable (String userName, String title, Date deliveryDate, String url) {
+        this.userName = userName;
         this.title = title;
         this.deliveryDate = deliveryDate;
         this.url = url;
@@ -49,12 +48,12 @@ public class Deliverable {
         this.url = url;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public boolean isApproved() {

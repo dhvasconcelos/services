@@ -10,14 +10,13 @@ import java.util.Date;
  */
 public class Homework extends Assignment {
 
+    static private int mockHomeworkID = 0;
 
     public Homework(String title) {
         super(title);
     }
 
-    public Homework(Bootcamp bootcamp, Date creationDate, String title) {
-        super(bootcamp, creationDate, title);
+    public Homework(Date creationDate, String title, int assignmentID) {
+        super(creationDate, title, assignmentID);
     }
-
-
 }
