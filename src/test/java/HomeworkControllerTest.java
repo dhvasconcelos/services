@@ -3,12 +3,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.newapp.antofucker.assignments.Assignment;
 import org.newapp.antofucker.assignments.Deliverable;
-import org.newapp.antofucker.assignments.homework.Homework;
 import org.newapp.antofucker.othershits.User;
+import org.newapp.antofucker.persistance.ConnectionManager;
 import org.newapp.antofucker.service.assigmentservice.AssignmentService;
 import org.newapp.antofucker.service.assigmentservice.JDBCAssignmentService;
 import org.newapp.antofucker.service.assigmentservice.MockAssignmentService;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 /**
@@ -16,54 +19,73 @@ import java.util.Date;
  */
 public class HomeworkControllerTest {
 
-    AssignmentService assignmentService ;
+    AssignmentService assignmentService = new JDBCAssignmentService();
+    Connection dbConnection = ConnectionManager.getConnection();
 
     @Before
-    public void createService() {
-        assignmentService = new JDBCAssignmentService();
+    public void resetDatabase() {
+        try {
+            Statement statement = dbConnection.createStatement();
+
+            String deleteQuery = "DELETE FROM assignment WHERE assignment_id < 100;";
+            String resetCounterQuery = "ALTER TABLE assignment AUTO_INCREMENT = 1;";
+
+            statement.execute(deleteQuery);
+            statement.execute(resetCounterQuery);
+
+            statement.close();
+
+        } catch (SQLException e) {
+            System.out.println("Failure deleting assignment: " + e.getMessage());
+        }
     }
 
 
     @Test
     public void testAddAssignment() {
-        assignmentService.add(new Homework("NEW_HW"));
+        assignmentService.add(new Assignment("NEW_HW", "summarizer"));
         Assert.assertEquals(1, assignmentService.list());
     }
 
     @Test
     public void testAddAssignment2() {
-        assignmentService.add(new Homework("NEW_HW"));
-        assignmentService.add(new Homework("NEW_HW2"));
-        assignmentService.add(new Homework("NEW_HW3"));
+        assignmentService.add(new Assignment("NEW_HW", "homework"));
+        assignmentService.add(new Assignment("NEW_HW2", "homework"));
+        assignmentService.add(new Assignment("NEW_HW3", "summarizer"));
         Assert.assertEquals(3, assignmentService.list());
     }
 
-    /*@Test
+    @Test
+    public void testFindAssignment() {
+        assignmentService.add(new Assignment("NEW_HW", "summarizer"));
+        Assignment assignment = assignmentService.findAssignment(1);
+        Assert.assertEquals("NEW_HW", assignment.getTitle());
+        Assert.assertEquals("summarizer", assignment.getAssignmentType());
+        Assert.assertEquals(1, assignment.getAssignmentID());
+    }
+
+    @Test
     public void testRemoveAssignment() {
-        Assignment hw = new Homework("HW_TO_DEL");
-        assignmentService.add(hw);
-        assignmentService.remove(hw.getAssignmentID());
+        assignmentService.add(new Assignment("NEW_HW", "homework"));
+        assignmentService.add(new Assignment("NEW_HW2", "homework"));
+        assignmentService.remove(1);
 
 
-        Assert.assertEquals(0,assignmentService.list().size());
+        Assert.assertEquals(1,assignmentService.list());
     }
 
     @Test
     public void testRemoveAssignment2() {
-        Assignment hw1 = new Homework("HW1_TO_DEL");
-        Assignment hw2 = new Homework("HW2_TO_DEL");
-        Assignment hw3 = new Homework("HW3_TO_DEL");
-        assignmentService.add(hw1);
-        assignmentService.add(hw2);
-        assignmentService.add(hw3);
+        assignmentService.add(new Assignment("NEW_HW", "homework"));
+        assignmentService.add(new Assignment("NEW_HW2", "homework"));
+        assignmentService.add(new Assignment("NEW_HW3", "summarizer"));
+        assignmentService.remove(2);
+        assignmentService.remove(3);
 
-        assignmentService.remove(hw1.getAssignmentID());
-        assignmentService.remove(hw2.getAssignmentID());
-
-        Assert.assertEquals(1, assignmentService.list().size());
+        Assert.assertEquals(1, assignmentService.list());
     }
 
-
+/*
     @Test
     public void testUpdateAssignmentTitle() {
         Assignment hw = new Homework("HW_TO_UPDATE");

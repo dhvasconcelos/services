@@ -21,20 +21,34 @@ public class Assignment {
     private String title;
     private Map<String, Deliverable> deliverables = new HashMap<>();
 
-    public Assignment(String title) {
+    public Assignment(String title, String assignmentType) {
         //DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date myDate = new Date(System.currentTimeMillis());
         creationDate = new Date(myDate.getTime());
         setTitle(title);
+        this.assignmentType = assignmentType;
 
         //MOCK ID
         assignmentID = mockID++;
     }
 
-    public Assignment (Date creationDate, String title, int assignmentID) {
+    public Assignment(String title, String assignmentType, String username) {
+        //DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date myDate = new Date(System.currentTimeMillis());
+        creationDate = new Date(myDate.getTime());
+        setTitle(title);
+        this.assignmentType = assignmentType;
+        addDeliverable(new Deliverable(username));
+
+        //MOCK ID
+        assignmentID = mockID++;
+    }
+
+    public Assignment (Date creationDate, String title, int assignmentID, String assignmentType) {
         this.creationDate = creationDate;
         this.title = title;
         this.assignmentID = assignmentID;
+        this.assignmentType = assignmentType;
     }
 
     public String getTitle() {

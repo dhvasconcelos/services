@@ -1,8 +1,6 @@
 package org.newapp.antofucker.controller;
 
 import org.newapp.antofucker.assignments.Deliverable;
-import org.newapp.antofucker.assignments.homework.Homework;
-import org.newapp.antofucker.assignments.summarizer.Summarizer;
 import org.newapp.antofucker.service.assigmentservice.AssignmentService;
 import org.newapp.antofucker.service.assigmentservice.MockAssignmentService;
 
@@ -18,7 +16,7 @@ public class HomeworkController {
     }
 
 
-    //RECEBE HOMEWORK OU RECEBE INFO PARA HOMEWORK?
+    /*//RECEBE HOMEWORK OU RECEBE INFO PARA HOMEWORK?
     public boolean addHomework(String title) {
 
         Homework hw = new Homework(title);
@@ -38,7 +36,7 @@ public class HomeworkController {
 
         homeworkService.findAssignment(assignmentID).addDeliverable(deliverable);
         return true;
-    }
+    }*/
 
 
 
