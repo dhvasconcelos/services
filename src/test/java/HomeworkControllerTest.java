@@ -41,7 +41,7 @@ public class HomeworkControllerTest {
     public void testRemoveAssignment() {
         Assignment hw = new Homework("HW_TO_DEL");
         assignmentService.add(hw);
-        assignmentService.remove(hw);
+        assignmentService.remove(hw.getAssignmentID());
 
 
         Assert.assertEquals(0,assignmentService.list().size());
@@ -56,8 +56,8 @@ public class HomeworkControllerTest {
         assignmentService.add(hw2);
         assignmentService.add(hw3);
 
-        assignmentService.remove(hw1);
-        assignmentService.remove(hw2);
+        assignmentService.remove(hw1.getAssignmentID());
+        assignmentService.remove(hw2.getAssignmentID());
 
         Assert.assertEquals(1, assignmentService.list().size());
     }
@@ -68,7 +68,7 @@ public class HomeworkControllerTest {
         Assignment hw = new Homework("HW_TO_UPDATE");
         assignmentService.add(hw);
 
-        assignmentService.updateAssignment(hw, new Assignment("NEW_HW"));
+        assignmentService.updateAssignment(hw.getAssignmentID(), new Assignment("NEW_HW"));
         Assert.assertEquals(hw.getTitle(),"NEW_HW");
     }
 
@@ -83,7 +83,7 @@ public class HomeworkControllerTest {
         hw.addDeliverable(del1);
         hw.addDeliverable(del2);
 
-        assignmentService.updateDeliverable(hw, del1, new Deliverable("antonious", "SQL", new Date(), "http://test.com"));
+        assignmentService.updateDeliverable(hw.getAssignmentID(), del1, new Deliverable("antonious", "SQL", new Date(), "http://test.com"));
 
         Assert.assertEquals(del1.getUserName(),"antonious");
 

@@ -14,11 +14,11 @@ public interface AssignmentService {
 
     public void add (Assignment assignment);
 
-    public void remove(Assignment assignment);
+    public void remove(int assignmentID);
 
     public Assignment find(int assignmentID);
 
-    public void updateAssignment(Assignment assignment, Assignment newAssignment);
+    public void updateAssignment(int assignmentID, Assignment newAssignment);
 
-    public void updateDeliverable(Assignment assignment, Deliverable deliverable, Deliverable newDeliverable);
+    public void updateDeliverable(int assignmentID, Deliverable deliverable, Deliverable newDeliverable);
 }

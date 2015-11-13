@@ -27,8 +27,8 @@ public class MockAssignmentService implements AssignmentService {
     }
 
     @Override
-    public void remove(Assignment assignment) {
-        assignments.remove(assignment.getTitle());
+    public void remove(int assignmentID) {
+        assignments.remove(assignmentID);
     }
 
     @Override
@@ -37,27 +37,27 @@ public class MockAssignmentService implements AssignmentService {
     }
 
     @Override
-    public void updateAssignment(Assignment assignment, Assignment newAss) {
-        assignment.setTitle(newAss.getTitle());
+    public void updateAssignment(int assignmentID, Assignment newAss) {
+        assignments.get(assignmentID).setTitle(newAss.getTitle());
     }
 
     @Override
-    public void updateDeliverable(Assignment assignment, Deliverable deliverable, Deliverable newDeliverable) {
+    public void updateDeliverable(int assignmentID, Deliverable deliverable, Deliverable newDeliverable) {
 
-        assignments.get(assignment.getTitle())
+        assignments.get(assignmentID)
                 .getDeliverable(deliverable.getUserName())
                 .setTitle(newDeliverable.getTitle());
 
-        assignments.get(assignment.getTitle())
+        assignments.get(assignmentID)
                 .getDeliverable(deliverable.getUserName())
                 .setDeliveryDate(newDeliverable.getDeliveryDate());
 
-        assignments.get(assignment.getTitle())
+        assignments.get(assignmentID)
                 .getDeliverable(deliverable.getUserName())
                 .setTags(newDeliverable.getTags());
 
 
-        assignments.get(assignment.getTitle())
+        assignments.get(assignmentID)
                 .getDeliverable(deliverable.getUserName())
                 .setUserName(newDeliverable.getUserName());
     }
